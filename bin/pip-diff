@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """Usage:
   pip-diff (--fresh | --stale) <reqfile1> <reqfile2> [--exclude <package>...]
   pip-diff (-h | --help)
@@ -9,13 +8,13 @@ Options:
   -h --help     Show this screen.
   --fresh       List newly added packages.
   --stale       List removed packages.
-"""
+"""#这里格式是 docopt的要求
 import os
 from docopt import docopt
 from pip.req import parse_requirements
 from pip.index import PackageFinder
 from pip._vendor.requests import session
-
+#三个pip内部库 查不到的
 requests = session()
 
 
@@ -95,8 +94,8 @@ def diff(r1, r2, include_fresh=False, include_stale=False, excludes=None):
 
     if include_stale:
         for line in results['stale']:
-            print(line.name if include_versions else line)
-
+            print(line.name if include_versions else line)  
+    #分别输出两种模式下的内容
 
 def main():
     args = docopt(__doc__, version='pip-diff')
